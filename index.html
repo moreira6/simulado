@@ -4,148 +4,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulado - 5º Ano</title>
+<title>Simulado SAEGO - 5º Ano</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f4f9;
-  color:#263248;
-}
-header{
-  background:linear-gradient(135deg,#174a8b,#2675c9);
-  color:white;
-  padding:28px 18px;
-  text-align:center;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f4f9;color:#263248}
+header{background:linear-gradient(135deg,#174a8b,#2675c9);color:white;padding:28px 18px;text-align:center}
 header h1{margin:0 0 8px;font-size:27px}
 header p{margin:0;font-size:14px}
-.container{
-  max-width:850px;
-  margin:25px auto;
-  padding:0 15px;
-}
-.card{
-  background:white;
-  border-radius:15px;
-  padding:25px;
-  box-shadow:0 4px 18px #0000000c;
-}
-.top-info{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:15px;
-  font-size:14px;
-  font-weight:bold;
-}
-.progress{
-  width:100%;
-  height:9px;
-  background:#e5eaf1;
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:25px;
-}
-.progress-bar{
-  height:100%;
-  background:#2675c9;
-  width:0%;
-  transition:.3s;
-}
-.subject{
-  display:inline-block;
-  background:#e9f2ff;
-  color:#17569a;
-  padding:7px 12px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
-.question{
-  font-size:19px;
-  line-height:1.55;
-  font-weight:bold;
-  margin-bottom:17px;
-}
-.text-box{
-  background:#f7f9fc;
-  border-left:4px solid #2675c9;
-  padding:17px;
-  border-radius:8px;
-  line-height:1.65;
-  margin:15px 0 22px;
-  font-size:15px;
-}
-.comic{
-  display:block;
-  max-width:100%;
-  height:auto;
-  margin:15px auto;
-  border-radius:8px;
-}
-.options{
-  display:grid;
-  gap:11px;
-  margin-top:18px;
-}
-.option{
-  display:flex;
-  align-items:flex-start;
-  gap:11px;
-  padding:14px;
-  border:2px solid #e1e6ed;
-  border-radius:10px;
-  cursor:pointer;
-  line-height:1.4;
-  transition:.2s;
-}
+.container{max-width:850px;margin:25px auto;padding:0 15px}
+.card{background:white;border-radius:15px;padding:25px;box-shadow:0 4px 18px #0000000c}
+.top-info{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:15px;font-size:14px;font-weight:bold}
+.progress{width:100%;height:9px;background:#e5eaf1;border-radius:20px;overflow:hidden;margin-bottom:25px}
+.progress-bar{height:100%;background:#2675c9;width:0%;transition:.3s}
+.subject{display:inline-block;background:#e9f2ff;color:#17569a;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:15px}
+.question{font-size:19px;line-height:1.55;font-weight:bold;margin-bottom:17px}
+.text-box{background:#f7f9fc;border-left:4px solid #2675c9;padding:17px;border-radius:8px;line-height:1.65;margin:15px 0 22px;font-size:15px}
+.options{display:grid;gap:11px;margin-top:18px}
+.option{display:flex;align-items:flex-start;gap:11px;padding:14px;border:2px solid #e1e6ed;border-radius:10px;cursor:pointer;line-height:1.4;transition:.2s}
 .option:hover{border-color:#2675c9;background:#f5f9ff}
-.option.selected{
-  border-color:#2675c9;
-  background:#eaf3ff;
-}
+.option.selected{border-color:#2675c9;background:#eaf3ff}
 .option input{margin-top:3px;accent-color:#2675c9}
-.fill-input{
-  width:100%;
-  padding:14px;
-  border:2px solid #dce3ed;
-  border-radius:9px;
-  font-size:16px;
-  margin-top:10px;
-}
-.match-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  align-items:center;
-  margin:12px 0;
-}
-.match-row span{font-size:14px;line-height:1.4}
-.match-row select{
-  padding:11px;
-  border:2px solid #dce3ed;
-  border-radius:8px;
-  min-width:0;
-  background:white;
-}
-.buttons{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:30px;
-}
-button{
-  border:0;
-  border-radius:9px;
-  padding:13px 20px;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
-}
+.buttons{display:flex;justify-content:space-between;gap:12px;margin-top:30px}
+button{border:0;border-radius:9px;padding:13px 20px;font-size:15px;font-weight:bold;cursor:pointer}
 button:disabled{opacity:.4;cursor:not-allowed}
 .primary{background:#2675c9;color:white}
 .secondary{background:#e9edf3;color:#263248}
@@ -153,417 +33,382 @@ button:disabled{opacity:.4;cursor:not-allowed}
 button:hover:not(:disabled){filter:brightness(.95)}
 .result{text-align:center}
 .result h2{font-size:26px}
-.score{
-  font-size:48px;
-  font-weight:bold;
-  color:#2675c9;
-  margin:20px 0;
-}
-.result-box{
-  background:#f5f8fc;
-  border-radius:10px;
-  padding:16px;
-  margin:12px 0;
-  text-align:left;
-}
+.score{font-size:48px;font-weight:bold;color:#2675c9;margin:20px 0}
+.result-box{background:#f5f8fc;border-radius:10px;padding:16px;margin:12px 0;text-align:left}
 .result-box h3{margin:0 0 8px}
-.review-item{
-  border-top:1px solid #e0e5ec;
-  padding:15px 0;
-  text-align:left;
-  line-height:1.5;
-}
+.review-item{border-top:1px solid #e0e5ec;padding:15px 0;text-align:left;line-height:1.5}
 .correct{color:#16865b;font-weight:bold}
 .wrong{color:#c33b3b;font-weight:bold}
 .hidden{display:none}
 @media(max-width:550px){
-  .card{padding:18px}
-  .question{font-size:17px}
-  .buttons{flex-wrap:wrap}
-  .buttons button{flex:1}
-  .match-row{grid-template-columns:1fr}
+.card{padding:18px}.question{font-size:17px}
+.buttons{flex-wrap:wrap}.buttons button{flex:1}
 }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>SIMULADO SAEGO</h1>
-  <p>AVALIAÇÃO DE APRENDIZAGEM • 5º ANO</p>
+<h1>SIMULADO SAEGO</h1>
+<p>AVALIAÇÃO DE APRENDIZAGEM • 5º ANO</p>
 </header>
 
 <div class="container">
-  <div class="card" id="quiz">
-    <div class="top-info">
-      <span id="questionNumber"></span>
-      <span id="subjectInfo"></span>
-    </div>
-    <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-    <div id="questionArea"></div>
-    <div class="buttons">
-      <button class="secondary" id="prevBtn" onclick="previousQuestion()">Anterior</button>
-      <button class="primary" id="nextBtn" onclick="nextQuestion()">Próxima</button>
-      <button class="finish hidden" id="finishBtn" onclick="finishQuiz()">Finalizar simulado</button>
-    </div>
-  </div>
-
-  <div class="card hidden result" id="result"></div>
+<div class="card" id="quiz">
+<div class="top-info">
+<span id="questionNumber"></span>
+<span id="subjectInfo"></span>
+</div>
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<div id="questionArea"></div>
+<div class="buttons">
+<button class="secondary" id="prevBtn" onclick="previousQuestion()">Anterior</button>
+<button class="primary" id="nextBtn" onclick="nextQuestion()">Próxima</button>
+<button class="finish hidden" id="finishBtn" onclick="finishQuiz()">Finalizar simulado</button>
+</div>
+</div>
+<div class="card hidden result" id="result"></div>
 </div>
 
 <script>
 const questions = [
 
-/* ================= PORTUGUÊS ================= */
+/* PORTUGUÊS - 20 QUESTÕES */
 
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O mistério do jardim</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O mistério do jardim</strong><br><br>
 Todas as manhãs, Lucas passava pelo jardim de sua avó antes de ir para a escola. Ele gostava de observar as flores, ouvir os pássaros e sentir o perfume das plantas.<br><br>
 Certa manhã, percebeu que algumas flores estavam fora do lugar e que pequenas pegadas apareciam perto do canteiro. Curioso, resolveu investigar. Escondeu-se atrás de uma árvore e esperou alguns minutos.<br><br>
 De repente, um pequeno coelho saiu debaixo de um arbusto e começou a comer as folhas da alface. Lucas finalmente descobriu quem estava visitando o jardim.`,
- question:"O que Lucas descobriu ao observar o jardim?",
- options:["Que sua avó havia plantado novas flores.","Que um coelho estava comendo as folhas da alface.","Que os pássaros haviam destruído o canteiro.","Que alguém havia levado todas as plantas."],
- answer:1
+question:"O que Lucas descobriu ao observar o jardim?",
+options:["Que sua avó havia plantado novas flores.","Que um coelho estava comendo as folhas da alface.","Que os pássaros haviam destruído o canteiro.","Que alguém havia levado todas as plantas."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>Uma atitude importante</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>Uma atitude importante</strong><br><br>
 Na escola de Mariana, os alunos perceberam que havia muito lixo espalhado pelo pátio depois do recreio. Alguns estudantes decidiram conversar com a turma e organizar uma campanha de conscientização.<br><br>
 Eles produziram cartazes, separaram lixeiras para materiais recicláveis e explicaram aos colegas a importância de manter os espaços coletivos limpos.<br><br>
 Depois de algumas semanas, o pátio estava mais organizado. Os estudantes perceberam que pequenas atitudes, quando realizadas em conjunto, podem provocar grandes mudanças.`,
- question:"Qual é a principal mensagem transmitida pelo texto?",
- options:["A escola deve proibir os recreios.","A limpeza é responsabilidade apenas dos funcionários.","A colaboração de todos pode transformar o ambiente.","Os cartazes são a única maneira de resolver problemas."],
- answer:2
+question:"Qual é a principal mensagem transmitida pelo texto?",
+options:["A escola deve proibir os recreios.","A limpeza é responsabilidade apenas dos funcionários.","A colaboração de todos pode transformar o ambiente.","Os cartazes são a única maneira de resolver problemas."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>A biblioteca da escola</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>A biblioteca da escola</strong><br><br>
 A biblioteca era um dos lugares preferidos de Pedro. Nas prateleiras, havia livros de aventura, histórias em quadrinhos, contos de fadas e livros sobre animais.<br><br>
 Em uma tarde chuvosa, Pedro escolheu um livro sobre viagens pelo mundo. Ao começar a leitura, imaginou que estava conhecendo lugares distantes, atravessando florestas e descobrindo cidades desconhecidas.<br><br>
 Quando terminou o capítulo, percebeu que já havia passado mais de uma hora. Mesmo sem sair da escola, tinha conhecido muitos lugares por meio da leitura.`,
- question:"De acordo com o texto, por que Pedro gostava de ler?",
- options:["Porque os livros permitiam conhecer novos lugares por meio da imaginação.","Porque precisava terminar todos os livros da biblioteca.","Porque não gostava de brincar com os colegas.","Porque queria trabalhar como bibliotecário."],
- answer:0
+question:"De acordo com o texto, por que Pedro gostava de ler?",
+options:["Porque os livros permitiam conhecer novos lugares por meio da imaginação.","Porque precisava terminar todos os livros da biblioteca.","Porque não gostava de brincar com os colegas.","Porque queria trabalhar como bibliotecário."],
+answer:0
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O passeio inesperado</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O passeio inesperado</strong><br><br>
 No sábado, Júlia acordou cedo e organizou uma mochila com água, frutas e um caderno. Seu pai havia prometido levá-la para conhecer uma cachoeira próxima à cidade.<br><br>
 Durante o caminho, começou a chover. A família decidiu mudar os planos e visitar um museu. Júlia ficou um pouco decepcionada, mas logo se interessou pelas exposições de animais, fotografias antigas e objetos históricos.<br><br>
 No fim do passeio, ela disse que havia sido um dia diferente, mas muito divertido.`,
- question:"O que fez a família mudar os planos?",
- options:["A mochila de Júlia estava pesada.","O museu estava fechado.","A chuva começou durante o caminho.","A cachoeira estava muito distante."],
- answer:2
+question:"O que fez a família mudar os planos?",
+options:["A mochila de Júlia estava pesada.","O museu estava fechado.","A chuva começou durante o caminho.","A cachoeira estava muito distante."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia a tirinha a seguir:",
- passage:`<img class="comic" src="https://static.todamateria.com.br/upload/ga/rf/garfiel.jpg" alt="Tirinha do Garfield" onerror="this.style.display='none';document.getElementById('comicFallback').style.display='block'">
-<div id="comicFallback" style="display:none;padding:15px;background:#f2f2f2;border-radius:8px">Imagem da tirinha do Garfield. Caso não apareça, verifique a conexão com a internet.</div>`,
- question:"Considerando a situação apresentada na tirinha, o humor está relacionado principalmente:",
- options:["À preocupação de Garfield com a alimentação.","À ironia e ao sarcasmo presentes na fala e no pensamento dos personagens.","À tentativa de Garfield de fugir de casa.","À amizade entre os personagens e os animais."],
- answer:1
+subject:"Língua Portuguesa",
+text:"Leia a tirinha do Garfield:",
+passage:`<img src="https://static.todamateria.com.br/upload/ga/rf/garfiel.jpg" alt="Tirinha do Garfield" style="max-width:100%;height:auto;display:block;margin:15px auto;">`,
+question:"Considerando a situação apresentada na tirinha, o humor está relacionado principalmente:",
+options:["À preocupação de Garfield com a alimentação.","À ironia e ao sarcasmo presentes na fala e no pensamento dos personagens.","À tentativa de Garfield de fugir de casa.","À amizade entre os personagens e os animais."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O cachorro e o espelho</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O cachorro e o espelho</strong><br><br>
 Um cachorro entrou em uma sala onde havia um grande espelho. Ao perceber sua própria imagem, começou a latir e a pular, acreditando que havia outro cachorro diante dele.<br><br>
 Quanto mais se movimentava, mais o reflexo repetia seus gestos. Depois de algum tempo, cansado, o animal se afastou e percebeu que não havia ninguém ali.<br><br>
 A situação mostra como uma interpretação equivocada pode provocar reações inesperadas.`,
- question:"O que o cachorro pensou ao ver sua imagem no espelho?",
- options:["Que havia encontrado um brinquedo.","Que outro cachorro estava diante dele.","Que alguém havia entrado na sala.","Que precisava sair de casa."],
- answer:1
+question:"O que o cachorro pensou ao ver sua imagem no espelho?",
+options:["Que havia encontrado um brinquedo.","Que outro cachorro estava diante dele.","Que alguém havia entrado na sala.","Que precisava sair de casa."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>Feira de ciências</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>Feira de ciências</strong><br><br>
 Os alunos do 5º ano organizaram uma feira de ciências para apresentar projetos sobre o meio ambiente. Um grupo construiu um filtro simples para demonstrar como algumas etapas ajudam a retirar impurezas da água.<br><br>
 Outro grupo apresentou uma maquete de uma cidade sustentável, com áreas verdes, ciclovias e painéis solares. Os visitantes puderam fazer perguntas e conhecer as ideias desenvolvidas pelos estudantes.<br><br>
 A feira foi uma oportunidade de compartilhar conhecimentos e aprender de maneira prática.`,
- question:"Qual foi o objetivo principal da feira de ciências?",
- options:["Vender materiais escolares.","Substituir as aulas por apresentações.","Compartilhar conhecimentos e apresentar projetos.","Escolher os alunos mais inteligentes."],
- answer:2
+question:"Qual foi o objetivo principal da feira de ciências?",
+options:["Vender materiais escolares.","Substituir as aulas por apresentações.","Compartilhar conhecimentos e apresentar projetos.","Escolher os alunos mais inteligentes."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O relógio atrasado</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O relógio atrasado</strong><br><br>
 Na segunda-feira, Rafael acordou assustado ao perceber que seu relógio marcava um horário muito diferente do habitual. Rapidamente, vestiu o uniforme, tomou café e saiu de casa.<br><br>
 Ao chegar à escola, encontrou o portão fechado e nenhum colega no pátio. Foi então que percebeu: havia se confundido com o horário, pois o relógio estava atrasado e ainda era muito cedo.<br><br>
 Rafael decidiu sentar-se na sombra de uma árvore e aproveitar o tempo para ler.`,
- question:"Por que Rafael chegou tão cedo à escola?",
- options:["Porque queria conversar com o diretor.","Porque seu relógio estava atrasado.","Porque havia uma prova surpresa.","Porque perdeu o ônibus."],
- answer:1
+question:"Por que Rafael chegou tão cedo à escola?",
+options:["Porque queria conversar com o diretor.","Porque seu relógio estava atrasado.","Porque havia uma prova surpresa.","Porque perdeu o ônibus."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>Convite especial</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>Convite especial</strong><br><br>
 A direção da Escola Caminhos do Saber convida estudantes, familiares e comunidade para a Mostra Cultural, que acontecerá no dia 15 de dezembro, às 14 horas, no pátio da escola.<br><br>
 Durante o evento, serão apresentados trabalhos produzidos pelas turmas, exposições artísticas, músicas e apresentações teatrais.<br><br>
 Sua presença será muito importante!`,
- question:"Qual é a finalidade principal desse texto?",
- options:["Contar uma história sobre a escola.","Ensinar como produzir trabalhos artísticos.","Convidar as pessoas para um evento.","Informar sobre o encerramento das aulas."],
- answer:2
+question:"Qual é a finalidade principal desse texto?",
+options:["Contar uma história sobre a escola.","Ensinar como produzir trabalhos artísticos.","Convidar as pessoas para um evento.","Informar sobre o encerramento das aulas."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>A importância das árvores</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>A importância das árvores</strong><br><br>
 As árvores desempenham funções fundamentais para o equilíbrio ambiental. Elas oferecem sombra, ajudam a melhorar a qualidade do ar e servem de abrigo para diversas espécies de animais.<br><br>
 Além disso, suas raízes contribuem para a conservação do solo e ajudam a diminuir os efeitos da erosão. Por isso, preservar as áreas verdes é uma atitude importante para a natureza e para a qualidade de vida das pessoas.`,
- question:"Segundo o texto, qual é uma das funções das raízes das árvores?",
- options:["Produzir lixo orgânico.","Contribuir para a conservação do solo.","Impedir a existência de animais.","Aumentar a temperatura do ambiente."],
- answer:1
+question:"Segundo o texto, qual é uma das funções das raízes das árvores?",
+options:["Produzir lixo orgânico.","Contribuir para a conservação do solo.","Impedir a existência de animais.","Aumentar a temperatura do ambiente."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>Uma descoberta na praça</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>Uma descoberta na praça</strong><br><br>
 Durante uma brincadeira na praça, Sofia encontrou uma pequena caixa de madeira perto de um banco. Dentro dela havia fotografias antigas, algumas cartas e um bilhete com a seguinte frase: “As melhores lembranças merecem ser compartilhadas”.<br><br>
 Sofia levou a caixa até a administração da praça. Depois de alguns dias, descobriram que os objetos pertenciam a uma antiga moradora do bairro, que havia perdido a caixa muitos anos antes.`,
- question:"O que aconteceu depois que Sofia encontrou a caixa?",
- options:["Ela guardou os objetos em sua casa.","Ela jogou a caixa no lixo.","Os objetos foram identificados como pertencentes a uma antiga moradora.","Ela vendeu as fotografias."],
- answer:2
+question:"O que aconteceu depois que Sofia encontrou a caixa?",
+options:["Ela guardou os objetos em sua casa.","Ela jogou a caixa no lixo.","Os objetos foram identificados como pertencentes a uma antiga moradora.","Ela vendeu as fotografias."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O uso consciente da água</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O uso consciente da água</strong><br><br>
 A água é indispensável para a vida. Utilizamos esse recurso em atividades como cozinhar, tomar banho, lavar roupas e cultivar alimentos.<br><br>
 Apesar de sua importância, muitas pessoas desperdiçam água em tarefas cotidianas. Fechar a torneira enquanto escovamos os dentes, consertar vazamentos e aproveitar a água da chuva para algumas atividades são atitudes que ajudam a evitar o desperdício.`,
- question:"Qual atitude é apresentada como forma de economizar água?",
- options:["Deixar a torneira aberta durante a escovação.","Lavar a calçada diariamente com mangueira.","Consertar vazamentos.","Tomar banhos cada vez mais demorados."],
- answer:2
+question:"Qual atitude é apresentada como forma de economizar água?",
+options:["Deixar a torneira aberta durante a escovação.","Lavar a calçada diariamente com mangueira.","Consertar vazamentos.","Tomar banhos cada vez mais demorados."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>A menina e o livro</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>A menina e o livro</strong><br><br>
 Ana ganhou um livro de histórias de presente. No começo, achou que seria uma leitura cansativa, mas decidiu experimentar algumas páginas antes de dormir.<br><br>
 A história falava de uma menina que viajava por lugares fantásticos e conhecia personagens diferentes. Ana ficou tão interessada que, no dia seguinte, contou aos amigos sobre a aventura.<br><br>
 A partir daquele momento, passou a frequentar a biblioteca com mais frequência.`,
- question:"O que mudou na atitude de Ana?",
- options:["Ela deixou de gostar de histórias.","Ela passou a se interessar pela leitura.","Ela decidiu não frequentar mais a escola.","Ela trocou os livros por jogos."],
- answer:1
+question:"O que mudou na atitude de Ana?",
+options:["Ela deixou de gostar de histórias.","Ela passou a se interessar pela leitura.","Ela decidiu não frequentar mais a escola.","Ela trocou os livros por jogos."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O trabalho em equipe</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O trabalho em equipe</strong><br><br>
 A turma precisava construir uma maquete para uma apresentação. No início, todos queriam escolher a mesma tarefa e o trabalho não avançava.<br><br>
 A professora sugeriu que os estudantes conversassem e dividissem as responsabilidades. Alguns ficaram responsáveis pela pintura, outros pela montagem e outros pela pesquisa de informações.<br><br>
 Com a organização, conseguiram terminar a maquete dentro do prazo e perceberam que a colaboração tornou a atividade mais fácil.`,
- question:"O que ajudou a turma a concluir a atividade?",
- options:["A divisão das tarefas e a colaboração.","A realização do trabalho por apenas um aluno.","A desistência de alguns estudantes.","A escolha de tarefas sem planejamento."],
- answer:0
+question:"O que ajudou a turma a concluir a atividade?",
+options:["A divisão das tarefas e a colaboração.","A realização do trabalho por apenas um aluno.","A desistência de alguns estudantes.","A escolha de tarefas sem planejamento."],
+answer:0
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>Uma notícia sobre o bairro</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>Uma notícia sobre o bairro</strong><br><br>
 Moradores do bairro Jardim das Flores participaram, no último sábado, de uma ação de plantio de mudas em uma praça. A iniciativa contou com a participação de crianças, adultos e idosos.<br><br>
 Ao todo, foram plantadas 35 mudas de árvores. Os organizadores informaram que novas atividades serão realizadas nos próximos meses para incentivar a preservação dos espaços públicos.`,
- question:"Qual informação apresenta um fato específico da notícia?",
- options:["A praça é o lugar mais bonito da cidade.","Foram plantadas 35 mudas de árvores.","Todos os moradores adoram jardinagem.","As árvores são melhores que as flores."],
- answer:1
+question:"Qual informação apresenta um fato específico da notícia?",
+options:["A praça é o lugar mais bonito da cidade.","Foram plantadas 35 mudas de árvores.","Todos os moradores adoram jardinagem.","As árvores são melhores que as flores."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O pequeno inventor</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O pequeno inventor</strong><br><br>
 Enzo gostava de desmontar objetos antigos para descobrir como funcionavam. Certo dia, resolveu construir um carrinho utilizando caixas, tampinhas e pedaços de papelão.<br><br>
 O primeiro modelo não se movimentou como ele esperava. Em vez de desistir, Enzo observou o problema, fez algumas alterações e tentou novamente.<br><br>
 Depois de várias tentativas, conseguiu construir um carrinho que se movimentava quando era empurrado.`,
- question:"Qual característica de Enzo fica mais evidente no texto?",
- options:["Desinteresse em aprender.","Impaciência diante das dificuldades.","Curiosidade e persistência.","Medo de experimentar coisas novas."],
- answer:2
+question:"Qual característica de Enzo fica mais evidente no texto?",
+options:["Desinteresse em aprender.","Impaciência diante das dificuldades.","Curiosidade e persistência.","Medo de experimentar coisas novas."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O valor da amizade</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O valor da amizade</strong><br><br>
 Quando Pedro mudou de escola, ficou inseguro por não conhecer ninguém. Durante os primeiros dias, passava o recreio sozinho e tinha dificuldade para participar das brincadeiras.<br><br>
 Certo dia, um colega chamado Miguel o convidou para jogar futebol. Aos poucos, Pedro conheceu outros estudantes e começou a se sentir mais acolhido.<br><br>
 Ele percebeu que uma simples atitude de aproximação poderia fazer uma grande diferença.`,
- question:"Qual atitude de Miguel contribuiu para a integração de Pedro?",
- options:["Ignorar sua presença.","Convidá-lo para participar da brincadeira.","Pedir que ele voltasse para a antiga escola.","Impedir que outros colegas conversassem com ele."],
- answer:1
+question:"Qual atitude de Miguel contribuiu para a integração de Pedro?",
+options:["Ignorar sua presença.","Convidá-lo para participar da brincadeira.","Pedir que ele voltasse para a antiga escola.","Impedir que outros colegas conversassem com ele."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O ciclo da borboleta</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O ciclo da borboleta</strong><br><br>
 A vida de uma borboleta passa por diferentes etapas. Primeiro, ela se desenvolve dentro de um ovo. Depois, nasce uma lagarta, que se alimenta e cresce.<br><br>
 Em seguida, a lagarta forma uma estrutura chamada crisálida. Dentro dela, acontecem transformações até que uma borboleta adulta esteja pronta para sair.<br><br>
 Esse processo é conhecido como metamorfose.`,
- question:"Qual é a ordem correta das etapas descritas no texto?",
- options:["Borboleta, ovo, crisálida e lagarta.","Ovo, lagarta, crisálida e borboleta.","Lagarta, borboleta, ovo e crisálida.","Crisálida, ovo, borboleta e lagarta."],
- answer:1
+question:"Qual é a ordem correta das etapas descritas no texto?",
+options:["Borboleta, ovo, crisálida e lagarta.","Ovo, lagarta, crisálida e borboleta.","Lagarta, borboleta, ovo e crisálida.","Crisálida, ovo, borboleta e lagarta."],
+answer:1
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>Um dia sem internet</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>Um dia sem internet</strong><br><br>
 Em uma manhã de domingo, a internet da casa de Laura parou de funcionar. No início, ela ficou sem saber o que fazer, pois estava acostumada a assistir vídeos e conversar com os amigos pelo celular.<br><br>
 Depois de algum tempo, decidiu pegar sua bicicleta e chamar a vizinha para brincar. As duas passaram a tarde na praça e inventaram diversas brincadeiras.<br><br>
 À noite, Laura percebeu que também era possível se divertir bastante longe das telas.`,
- question:"Qual é a reflexão apresentada pelo texto?",
- options:["A internet deve ser utilizada o tempo todo.","As brincadeiras só são divertidas quando acontecem on-line.","Existem formas de diversão além dos aparelhos eletrônicos.","As pessoas não precisam conversar com os amigos."],
- answer:2
+question:"Qual é a reflexão apresentada pelo texto?",
+options:["A internet deve ser utilizada o tempo todo.","As brincadeiras só são divertidas quando acontecem on-line.","Existem formas de diversão além dos aparelhos eletrônicos.","As pessoas não precisam conversar com os amigos."],
+answer:2
 },
 {
- subject:"Língua Portuguesa",type:"mc",
- text:"Leia o texto:",
- passage:`<strong>O cuidado com os animais</strong><br><br>
+subject:"Língua Portuguesa",
+text:"Leia o texto:",
+passage:`<strong>O cuidado com os animais</strong><br><br>
 Os animais domésticos dependem dos cuidados de seus responsáveis. Eles precisam de alimentação adequada, água limpa, abrigo e acompanhamento veterinário.<br><br>
 Também é importante oferecer atenção e respeitar as necessidades de cada animal. Ter um animal de estimação exige responsabilidade, pois ele não é um brinquedo e precisa de cuidados durante toda a vida.`,
- question:"De acordo com o texto, ter um animal de estimação significa:",
- options:["Assumir responsabilidades com seu bem-estar.","Oferecer comida apenas quando ele pedir.","Deixá-lo sozinho durante todo o dia.","Tratá-lo como um objeto de brincadeira."],
- answer:0
+question:"De acordo com o texto, ter um animal de estimação significa:",
+options:["Assumir responsabilidades com seu bem-estar.","Oferecer comida apenas quando ele pedir.","Deixá-lo sozinho durante todo o dia.","Trat á-lo como um objeto de brincadeira."],
+answer:0
 },
 
-/* ================= MATEMÁTICA ================= */
+/* MATEMÁTICA - 20 QUESTÕES */
 
 {
- subject:"Matemática",type:"mc",
- text:"Uma escola recebeu 248 livros para distribuir igualmente entre 8 turmas do 5º ano. Quantos livros cada turma receberá?",
- options:["29 livros","30 livros","31 livros","32 livros"],
- answer:2
+subject:"Matemática",
+text:"Uma escola recebeu 120 livros para distribuir igualmente entre 4 turmas do 5º ano. Quantos livros cada turma receberá?",
+options:["20 livros","25 livros","30 livros","40 livros"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma papelaria vendeu 135 cadernos pela manhã e 187 à tarde. Quantos cadernos foram vendidos ao todo?",
- options:["312","322","332","342"],
- answer:1
+subject:"Matemática",
+text:"Maria tinha 135 figurinhas e ganhou mais 42 de sua amiga. Quantas figurinhas Maria tem agora?",
+options:["167","177","187","197"],
+answer:1
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma biblioteca possui 1.250 livros. Durante uma campanha, recebeu mais 375 livros. Quantos livros a biblioteca possui agora?",
- options:["1.525","1.575","1.625","1.675"],
- answer:2
+subject:"Matemática",
+text:"Uma papelaria vendeu 85 cadernos pela manhã e 67 à tarde. Quantos cadernos foram vendidos ao todo?",
+options:["142","152","162","172"],
+answer:1
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma caixa contém 24 lápis. Quantos lápis existem em 15 caixas iguais?",
- options:["300","340","360","380"],
- answer:2
+subject:"Matemática",
+text:"João comprou 3 pacotes com 8 lápis em cada um. Quantos lápis ele comprou?",
+options:["11","18","24","32"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma escola organizou uma excursão com 156 estudantes. Cada ônibus comporta 39 estudantes. Quantos ônibus serão necessários?",
- options:["3","4","5","6"],
- answer:1
+subject:"Matemática",
+text:"Uma professora possui 36 balas e deseja dividir igualmente entre 6 alunos. Quantas balas cada aluno receberá?",
+options:["4","5","6","8"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Observe a fração 3/4. Qual alternativa representa essa fração por extenso?",
- options:["Três quartos","Quatro terços","Três quintos","Quatro quartos"],
- answer:0
+subject:"Matemática",
+text:"Uma pizza foi dividida em 4 pedaços iguais. Ana comeu 1 pedaço. Qual fração representa a parte que Ana comeu?",
+options:["1/2","1/3","1/4","4/1"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma pizza foi dividida em 8 pedaços iguais. Pedro comeu 3 pedaços. Que fração representa a parte que sobrou?",
- options:["3/8","5/8","6/8","8/5"],
- answer:1
+subject:"Matemática",
+text:"Uma barra de chocolate foi dividida em 8 partes iguais. Pedro comeu 3 partes. Quantas partes sobraram?",
+options:["3","4","5","6"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma loja recebeu 2.450 brinquedos e vendeu 1.275. Quantos brinquedos ainda restaram?",
- options:["1.075","1.125","1.175","1.225"],
- answer:2
+subject:"Matemática",
+text:"Qual fração representa a metade de uma figura dividida em duas partes iguais?",
+options:["1/2","1/3","1/4","2/3"],
+answer:0
 },
 {
- subject:"Matemática",
- type:"mc",
- text:"Observe a imagem e responda à questão.",
- passage:`<img
- src="https://uploads.tudosaladeaula.com/2024/09/FvKZcX6g-Sem20tC3ADtC3ADtulo-2834-jpg.webp"
- alt="Representação de frações"
- style="max-width:100%;height:auto;display:block;margin:15px auto;"
- >`,
- question:"Considerando as partes pintadas nas figuras, qual alternativa representa corretamente as frações indicadas?",
- options:[
-   "2/4 e 7/16",
-   "1/2 e 7/16",
-   "2/3 e 8/16",
-   "2/4 e 8/16"
- ],
- answer:0
+subject:"Matemática",
+text:"Uma turma tem 20 estudantes. Metade deles participa de uma atividade de leitura. Quantos estudantes participam dessa atividade?",
+options:["5","8","10","15"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Um terreno retangular possui 12 metros de comprimento e 8 metros de largura. Qual é o perímetro desse terreno?",
- options:["20 metros","32 metros","40 metros","96 metros"],
- answer:2
+subject:"Matemática",
+text:"Observe as frações: 1/2 e 1/4. Qual delas representa a maior quantidade, considerando figuras do mesmo tamanho?",
+options:["1/2","1/4","As duas representam a mesma quantidade.","Nenhuma representa uma quantidade."],
+answer:0
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma caixa possui 6 fileiras com 9 garrafas em cada uma. Quantas garrafas há na caixa?",
- options:["45","48","54","63"],
- answer:2
+subject:"Matemática",
+text:"Uma caixa contém 24 lápis. Se 6 lápis forem retirados, quantos continuarão na caixa?",
+options:["16","17","18","19"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Qual é o resultado da operação 3.456 + 2.789?",
- options:["6.145","6.245","6.345","6.445"],
- answer:1
+subject:"Matemática",
+text:"Qual é o resultado da operação 245 + 132?",
+options:["367","377","387","397"],
+answer:1
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma família comprou 4 pacotes de arroz de 5 kg cada. Quantos quilogramas de arroz foram comprados?",
- options:["9 kg","15 kg","20 kg","25 kg"],
- answer:2
+subject:"Matemática",
+text:"Uma loja tinha 350 brinquedos e vendeu 125. Quantos brinquedos restaram?",
+options:["215","225","235","245"],
+answer:1
 },
 {
- subject:"Matemática",type:"mc",
- text:"Em uma escola há 480 estudantes. Se 1/2 deles estudam no período da manhã, quantos estudantes estudam nesse período?",
- options:["120","180","240","280"],
- answer:2
+subject:"Matemática",
+text:"Uma escola comprou 5 caixas com 10 bolas em cada uma. Quantas bolas foram compradas?",
+options:["15","30","40","50"],
+answer:3
 },
 {
- subject:"Matemática",type:"mc",
- text:"Um filme começou às 15h20 e terminou às 17h05. Qual foi a duração do filme?",
- options:["1 hora e 25 minutos","1 hora e 35 minutos","1 hora e 45 minutos","2 horas e 5 minutos"],
- answer:2
+subject:"Matemática",
+text:"Uma aula começou às 13 horas e terminou às 15 horas. Quanto tempo durou a aula?",
+options:["1 hora","2 horas","3 horas","4 horas"],
+answer:1
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma loja vendeu 18 camisetas por R$ 25,00 cada. Quanto recebeu pela venda de todas as camisetas?",
- options:["R$ 350,00","R$ 400,00","R$ 450,00","R$ 500,00"],
- answer:2
+subject:"Matemática",
+text:"Qual figura geométrica possui três lados e três vértices?",
+options:["Quadrado","Retângulo","Triângulo","Círculo"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Observe a sequência: 5, 10, 15, 20, 25, ___. Qual número completa a sequência?",
- options:["28","30","32","35"],
- answer:1
+subject:"Matemática",
+text:"Qual das figuras geométricas abaixo possui quatro lados iguais?",
+options:["Triângulo","Quadrado","Círculo","Pentágono"],
+answer:1
 },
 {
- subject:"Matemática",type:"mc",
- text:"Um reservatório tinha 850 litros de água. Foram utilizados 275 litros. Quantos litros restaram?",
- options:["525","565","575","625"],
- answer:2
+subject:"Matemática",
+text:"Uma bola de futebol lembra qual sólido geométrico?",
+options:["Cubo","Esfera","Cone","Cilindro"],
+answer:1
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma receita utiliza 3 xícaras de farinha para fazer um bolo. Quantas xícaras serão necessárias para fazer 4 bolos iguais?",
- options:["7","9","12","15"],
- answer:2
+subject:"Matemática",
+text:"Um dado comum possui o formato de qual sólido geométrico?",
+options:["Esfera","Cone","Cubo","Cilindro"],
+answer:2
 },
 {
- subject:"Matemática",type:"mc",
- text:"Uma praça quadrada possui lados de 15 metros. Qual é a área dessa praça?",
- options:["30 m²","60 m²","150 m²","225 m²"],
- answer:3
+subject:"Matemática",
+text:"Qual objeto do cotidiano possui formato parecido com um cilindro?",
+options:["Lata de refrigerante","Bola de futebol","Dado","Casquinha de sorvete"],
+answer:0
 }
 ];
 
@@ -572,64 +417,25 @@ let answers=new Array(questions.length).fill(null);
 
 function render(){
  const q=questions[current];
- document.getElementById("questionNumber").textContent=
-   `Questão ${current+1} de ${questions.length}`;
+ document.getElementById("questionNumber").textContent=`Questão ${current+1} de ${questions.length}`;
  document.getElementById("subjectInfo").textContent=q.subject;
- document.getElementById("progressBar").style.width=
-   `${((current+1)/questions.length)*100}%`;
+ document.getElementById("progressBar").style.width=`${((current+1)/questions.length)*100}%`;
 
  let html=`<div class="subject">${q.subject}</div>
  <div class="question">${q.text}</div>`;
 
- if(q.passage) html+=`<div class="text-box">${q.passage}</div>`;
- if(q.image) html+=`<img class="comic" src="${q.image}" alt="Imagem da questão">`;
+ if(q.passage)html+=`<div class="text-box">${q.passage}</div>`;
 
- if(q.type==="mc" || !q.type){
-   html+=`<div class="options">`;
-   q.options.forEach((opt,i)=>{
-     const selected=answers[current]===i?"selected":"";
-     html+=`
-       <label class="option ${selected}">
-         <input type="radio" name="answer" value="${i}"
-          ${answers[current]===i?"checked":""}
-          onchange="selectAnswer(${i})">
-         <span><strong>${String.fromCharCode(65+i)})</strong> ${opt}</span>
-       </label>`;
-   });
-   html+=`</div>`;
- }
- else if(q.type==="tf"){
-   html+=`<div class="options">`;
-   ["Verdadeiro","Falso"].forEach((opt,i)=>{
-     html+=`<label class="option ${answers[current]===i?"selected":""}">
-       <input type="radio" name="answer" value="${i}"
-       ${answers[current]===i?"checked":""}
-       onchange="selectAnswer(${i})">
-       ${opt}
-     </label>`;
-   });
-   html+=`</div>`;
- }
- else if(q.type==="fill"){
-   html+=`<input class="fill-input" id="fillAnswer"
-     placeholder="Digite sua resposta"
-     value="${answers[current]??""}"
-     onchange="selectAnswer(this.value)">`;
- }
- else if(q.type==="match"){
-   html+=`<div class="options">`;
-   q.items.forEach((item,i)=>{
-     html+=`<div class="match-row">
-       <span>${item}</span>
-       <select onchange="selectMatch(${i},this.value)">
-         <option value="">Escolha</option>
-         ${q.matches.map((m,j)=>`<option value="${j}"
-         ${answers[current]?.[i]===j?"selected":""}>${m}</option>`).join("")}
-       </select>
-     </div>`;
-   });
-   html+=`</div>`;
- }
+ html+=`<div class="options">`;
+ q.options.forEach((opt,i)=>{
+  html+=`<label class="option ${answers[current]===i?"selected":""}">
+   <input type="radio" name="answer" value="${i}"
+   ${answers[current]===i?"checked":""}
+   onchange="selectAnswer(${i})">
+   <span><strong>${String.fromCharCode(65+i)})</strong> ${opt}</span>
+  </label>`;
+ });
+ html+=`</div>`;
 
  document.getElementById("questionArea").innerHTML=html;
  document.getElementById("prevBtn").disabled=current===0;
@@ -642,13 +448,6 @@ function selectAnswer(value){
  render();
 }
 
-function selectMatch(index,value){
- if(!Array.isArray(answers[current])){
-   answers[current]=[];
- }
- answers[current][index]=value===""?null:Number(value);
-}
-
 function previousQuestion(){
  if(current>0){current--;render();}
 }
@@ -658,80 +457,61 @@ function nextQuestion(){
 }
 
 function isCorrect(q,answer){
- if(q.type==="fill"){
-   return String(answer??"").trim().toLowerCase()===String(q.answer).trim().toLowerCase();
- }
- if(q.type==="match"){
-   return Array.isArray(answer)&&answer.every((v,i)=>v===q.answer[i]);
- }
  return answer===q.answer;
 }
 
 function finishQuiz(){
- const unanswered=answers.filter(a=>a===null||a===undefined||
-   a===""||(Array.isArray(a)&&a.some(v=>v===null||v===undefined))).length;
-
+ const unanswered=answers.filter(a=>a===null).length;
  if(unanswered>0){
-   const confirmFinish=confirm(`Você ainda tem ${unanswered} questão(ões) sem resposta. Deseja finalizar mesmo assim?`);
-   if(!confirmFinish)return;
+  if(!confirm(`Você ainda tem ${unanswered} questão(ões) sem resposta. Deseja finalizar mesmo assim?`))return;
  }
 
  let total=0,port=0,mat=0,portTotal=0,matTotal=0;
- questions.forEach((q,i)=>{
-   if(q.subject==="Língua Portuguesa")portTotal++;
-   else matTotal++;
-   if(isCorrect(q,answers[i])){
-     total++;
-     if(q.subject==="Língua Portuguesa")port++;
-     else mat++;
-   }
- });
 
- document.getElementById("quiz").classList.add("hidden");
- const result=document.getElementById("result");
- result.classList.remove("hidden");
+ questions.forEach((q,i)=>{
+  if(q.subject==="Língua Portuguesa")portTotal++;
+  else matTotal++;
+  if(isCorrect(q,answers[i])){
+   total++;
+   if(q.subject==="Língua Portuguesa")port++;
+   else mat++;
+  }
+ });
 
  let review="";
  questions.forEach((q,i)=>{
-   const correct=isCorrect(q,answers[i]);
-   if(!correct){
-     let chosen="Não respondida";
-     if(answers[i]!==null&&answers[i]!==undefined&&answers[i]!==""){
-       if(q.options&&typeof answers[i]==="number"){
-         chosen=q.options[answers[i]];
-       }else{
-         chosen=String(answers[i]);
-       }
-     }
-     const right=q.options?q.options[q.answer]:String(q.answer);
-     review+=`
-       <div class="review-item">
-         <strong>Questão ${i+1} - ${q.subject}</strong><br>
-         <span class="wrong">Sua resposta: ${chosen}</span><br>
-         <span class="correct">Resposta correta: ${right}</span>
-       </div>`;
-   }
+  if(!isCorrect(q,answers[i])){
+   const chosen=answers[i]===null?"Não respondida":q.options[answers[i]];
+   review+=`<div class="review-item">
+   <strong>Questão ${i+1} - ${q.subject}</strong><br>
+   <span class="wrong">Sua resposta: ${chosen}</span><br>
+   <span class="correct">Resposta correta: ${q.options[q.answer]}</span>
+   </div>`;
+  }
  });
 
- result.innerHTML=`
-   <h2>Simulado finalizado!</h2>
-   <p>Confira seu desempenho:</p>
-   <div class="score">${total} / ${questions.length}</div>
-   <p>Você acertou ${Math.round(total/questions.length*100)}% das questões.</p>
+ const result=document.getElementById("result");
+ document.getElementById("quiz").classList.add("hidden");
+ result.classList.remove("hidden");
 
-   <div class="result-box">
-     <h3>Língua Portuguesa</h3>
-     <strong>${port} de ${portTotal} questões</strong>
-   </div>
-   <div class="result-box">
-     <h3>Matemática</h3>
-     <strong>${mat} de ${matTotal} questões</strong>
-   </div>
-   <div class="result-box">
-     <h3>Questões para revisar</h3>
-     ${review||"<p class='correct'>Parabéns! Você acertou todas as questões!</p>"}
-   </div>
-   <button class="primary" onclick="restartQuiz()">Refazer simulado</button>
+ result.innerHTML=`
+ <h2>Simulado finalizado!</h2>
+ <p>Confira seu desempenho:</p>
+ <div class="score">${total} / ${questions.length}</div>
+ <p>Você acertou ${Math.round(total/questions.length*100)}% das questões.</p>
+ <div class="result-box">
+ <h3>Língua Portuguesa</h3>
+ <strong>${port} de ${portTotal} questões</strong>
+ </div>
+ <div class="result-box">
+ <h3>Matemática</h3>
+ <strong>${mat} de ${matTotal} questões</strong>
+ </div>
+ <div class="result-box">
+ <h3>Questões para revisar</h3>
+ ${review||"<p class='correct'>Parabéns! Você acertou todas as questões!</p>"}
+ </div>
+ <button class="primary" onclick="restartQuiz()">Refazer simulado</button>
  `;
  window.scrollTo({top:0,behavior:"smooth"});
 }
