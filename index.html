@@ -19,6 +19,7 @@ header p{margin:0;font-size:14px}
 .subject{display:inline-block;background:#e9f2ff;color:#17569a;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:15px}
 .question{font-size:19px;line-height:1.55;font-weight:bold;margin-bottom:17px}
 .text-box{background:#f7f9fc;border-left:4px solid #2675c9;padding:17px;border-radius:8px;line-height:1.65;margin:15px 0 22px;font-size:15px}
+.comic{display:block;max-width:100%;height:auto;margin:15px auto;border-radius:8px}
 .options{display:grid;gap:11px;margin-top:18px}
 .option{display:flex;align-items:flex-start;gap:11px;padding:14px;border:2px solid #e1e6ed;border-radius:10px;cursor:pointer;line-height:1.4;transition:.2s}
 .option:hover{border-color:#2675c9;background:#f5f9ff}
@@ -41,8 +42,10 @@ button:hover:not(:disabled){filter:brightness(.95)}
 .wrong{color:#c33b3b;font-weight:bold}
 .hidden{display:none}
 @media(max-width:550px){
-.card{padding:18px}.question{font-size:17px}
-.buttons{flex-wrap:wrap}.buttons button{flex:1}
+.card{padding:18px}
+.question{font-size:17px}
+.buttons{flex-wrap:wrap}
+.buttons button{flex:1}
 }
 </style>
 </head>
@@ -59,7 +62,9 @@ button:hover:not(:disabled){filter:brightness(.95)}
 <span id="questionNumber"></span>
 <span id="subjectInfo"></span>
 </div>
-<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
 <div id="questionArea"></div>
 <div class="buttons">
 <button class="secondary" id="prevBtn" onclick="previousQuestion()">Anterior</button>
@@ -73,11 +78,13 @@ button:hover:not(:disabled){filter:brightness(.95)}
 <script>
 const questions = [
 
-/* PORTUGUÊS - 20 QUESTÕES */
+/* =====================================
+   LÍNGUA PORTUGUESA - QUESTÕES 1 A 20
+===================================== */
 
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O mistério do jardim</strong><br><br>
 Todas as manhãs, Lucas passava pelo jardim de sua avó antes de ir para a escola. Ele gostava de observar as flores, ouvir os pássaros e sentir o perfume das plantas.<br><br>
 Certa manhã, percebeu que algumas flores estavam fora do lugar e que pequenas pegadas apareciam perto do canteiro. Curioso, resolveu investigar. Escondeu-se atrás de uma árvore e esperou alguns minutos.<br><br>
@@ -88,7 +95,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>Uma atitude importante</strong><br><br>
 Na escola de Mariana, os alunos perceberam que havia muito lixo espalhado pelo pátio depois do recreio. Alguns estudantes decidiram conversar com a turma e organizar uma campanha de conscientização.<br><br>
 Eles produziram cartazes, separaram lixeiras para materiais recicláveis e explicaram aos colegas a importância de manter os espaços coletivos limpos.<br><br>
@@ -99,7 +106,7 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>A biblioteca da escola</strong><br><br>
 A biblioteca era um dos lugares preferidos de Pedro. Nas prateleiras, havia livros de aventura, histórias em quadrinhos, contos de fadas e livros sobre animais.<br><br>
 Em uma tarde chuvosa, Pedro escolheu um livro sobre viagens pelo mundo. Ao começar a leitura, imaginou que estava conhecendo lugares distantes, atravessando florestas e descobrindo cidades desconhecidas.<br><br>
@@ -110,7 +117,7 @@ answer:0
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O passeio inesperado</strong><br><br>
 No sábado, Júlia acordou cedo e organizou uma mochila com água, frutas e um caderno. Seu pai havia prometido levá-la para conhecer uma cachoeira próxima à cidade.<br><br>
 Durante o caminho, começou a chover. A família decidiu mudar os planos e visitar um museu. Júlia ficou um pouco decepcionada, mas logo se interessou pelas exposições de animais, fotografias antigas e objetos históricos.<br><br>
@@ -121,15 +128,15 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia a tirinha do Garfield:",
-passage:`<img src="https://static.todamateria.com.br/upload/ga/rf/garfiel.jpg" alt="Tirinha do Garfield" style="max-width:100%;height:auto;display:block;margin:15px auto;">`,
+text:"Observe a tirinha do Garfield.",
+passage:`<img class="comic" src="https://static.todamateria.com.br/upload/ga/rf/garfiel.jpg" alt="Tirinha do Garfield" onerror="this.alt='Não foi possível carregar a tirinha. Verifique a conexão.'">`,
 question:"Considerando a situação apresentada na tirinha, o humor está relacionado principalmente:",
 options:["À preocupação de Garfield com a alimentação.","À ironia e ao sarcasmo presentes na fala e no pensamento dos personagens.","À tentativa de Garfield de fugir de casa.","À amizade entre os personagens e os animais."],
 answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O cachorro e o espelho</strong><br><br>
 Um cachorro entrou em uma sala onde havia um grande espelho. Ao perceber sua própria imagem, começou a latir e a pular, acreditando que havia outro cachorro diante dele.<br><br>
 Quanto mais se movimentava, mais o reflexo repetia seus gestos. Depois de algum tempo, cansado, o animal se afastou e percebeu que não havia ninguém ali.<br><br>
@@ -140,7 +147,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>Feira de ciências</strong><br><br>
 Os alunos do 5º ano organizaram uma feira de ciências para apresentar projetos sobre o meio ambiente. Um grupo construiu um filtro simples para demonstrar como algumas etapas ajudam a retirar impurezas da água.<br><br>
 Outro grupo apresentou uma maquete de uma cidade sustentável, com áreas verdes, ciclovias e painéis solares. Os visitantes puderam fazer perguntas e conhecer as ideias desenvolvidas pelos estudantes.<br><br>
@@ -151,7 +158,7 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O relógio atrasado</strong><br><br>
 Na segunda-feira, Rafael acordou assustado ao perceber que seu relógio marcava um horário muito diferente do habitual. Rapidamente, vestiu o uniforme, tomou café e saiu de casa.<br><br>
 Ao chegar à escola, encontrou o portão fechado e nenhum colega no pátio. Foi então que percebeu: havia se confundido com o horário, pois o relógio estava atrasado e ainda era muito cedo.<br><br>
@@ -162,7 +169,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>Convite especial</strong><br><br>
 A direção da Escola Caminhos do Saber convida estudantes, familiares e comunidade para a Mostra Cultural, que acontecerá no dia 15 de dezembro, às 14 horas, no pátio da escola.<br><br>
 Durante o evento, serão apresentados trabalhos produzidos pelas turmas, exposições artísticas, músicas e apresentações teatrais.<br><br>
@@ -173,7 +180,7 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>A importância das árvores</strong><br><br>
 As árvores desempenham funções fundamentais para o equilíbrio ambiental. Elas oferecem sombra, ajudam a melhorar a qualidade do ar e servem de abrigo para diversas espécies de animais.<br><br>
 Além disso, suas raízes contribuem para a conservação do solo e ajudam a diminuir os efeitos da erosão. Por isso, preservar as áreas verdes é uma atitude importante para a natureza e para a qualidade de vida das pessoas.`,
@@ -183,7 +190,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>Uma descoberta na praça</strong><br><br>
 Durante uma brincadeira na praça, Sofia encontrou uma pequena caixa de madeira perto de um banco. Dentro dela havia fotografias antigas, algumas cartas e um bilhete com a seguinte frase: “As melhores lembranças merecem ser compartilhadas”.<br><br>
 Sofia levou a caixa até a administração da praça. Depois de alguns dias, descobriram que os objetos pertenciam a uma antiga moradora do bairro, que havia perdido a caixa muitos anos antes.`,
@@ -193,7 +200,7 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O uso consciente da água</strong><br><br>
 A água é indispensável para a vida. Utilizamos esse recurso em atividades como cozinhar, tomar banho, lavar roupas e cultivar alimentos.<br><br>
 Apesar de sua importância, muitas pessoas desperdiçam água em tarefas cotidianas. Fechar a torneira enquanto escovamos os dentes, consertar vazamentos e aproveitar a água da chuva para algumas atividades são atitudes que ajudam a evitar o desperdício.`,
@@ -203,7 +210,7 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>A menina e o livro</strong><br><br>
 Ana ganhou um livro de histórias de presente. No começo, achou que seria uma leitura cansativa, mas decidiu experimentar algumas páginas antes de dormir.<br><br>
 A história falava de uma menina que viajava por lugares fantásticos e conhecia personagens diferentes. Ana ficou tão interessada que, no dia seguinte, contou aos amigos sobre a aventura.<br><br>
@@ -214,7 +221,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O trabalho em equipe</strong><br><br>
 A turma precisava construir uma maquete para uma apresentação. No início, todos queriam escolher a mesma tarefa e o trabalho não avançava.<br><br>
 A professora sugeriu que os estudantes conversassem e dividissem as responsabilidades. Alguns ficaram responsáveis pela pintura, outros pela montagem e outros pela pesquisa de informações.<br><br>
@@ -225,7 +232,7 @@ answer:0
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>Uma notícia sobre o bairro</strong><br><br>
 Moradores do bairro Jardim das Flores participaram, no último sábado, de uma ação de plantio de mudas em uma praça. A iniciativa contou com a participação de crianças, adultos e idosos.<br><br>
 Ao todo, foram plantadas 35 mudas de árvores. Os organizadores informaram que novas atividades serão realizadas nos próximos meses para incentivar a preservação dos espaços públicos.`,
@@ -235,7 +242,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O pequeno inventor</strong><br><br>
 Enzo gostava de desmontar objetos antigos para descobrir como funcionavam. Certo dia, resolveu construir um carrinho utilizando caixas, tampinhas e pedaços de papelão.<br><br>
 O primeiro modelo não se movimentou como ele esperava. Em vez de desistir, Enzo observou o problema, fez algumas alterações e tentou novamente.<br><br>
@@ -246,7 +253,7 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O valor da amizade</strong><br><br>
 Quando Pedro mudou de escola, ficou inseguro por não conhecer ninguém. Durante os primeiros dias, passava o recreio sozinho e tinha dificuldade para participar das brincadeiras.<br><br>
 Certo dia, um colega chamado Miguel o convidou para jogar futebol. Aos poucos, Pedro conheceu outros estudantes e começou a se sentir mais acolhido.<br><br>
@@ -257,7 +264,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O ciclo da borboleta</strong><br><br>
 A vida de uma borboleta passa por diferentes etapas. Primeiro, ela se desenvolve dentro de um ovo. Depois, nasce uma lagarta, que se alimenta e cresce.<br><br>
 Em seguida, a lagarta forma uma estrutura chamada crisálida. Dentro dela, acontecem transformações até que uma borboleta adulta esteja pronta para sair.<br><br>
@@ -268,7 +275,7 @@ answer:1
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>Um dia sem internet</strong><br><br>
 Em uma manhã de domingo, a internet da casa de Laura parou de funcionar. No início, ela ficou sem saber o que fazer, pois estava acostumada a assistir vídeos e conversar com os amigos pelo celular.<br><br>
 Depois de algum tempo, decidiu pegar sua bicicleta e chamar a vizinha para brincar. As duas passaram a tarde na praça e inventaram diversas brincadeiras.<br><br>
@@ -279,16 +286,25 @@ answer:2
 },
 {
 subject:"Língua Portuguesa",
-text:"Leia o texto:",
+text:"Leia o texto a seguir.",
 passage:`<strong>O cuidado com os animais</strong><br><br>
 Os animais domésticos dependem dos cuidados de seus responsáveis. Eles precisam de alimentação adequada, água limpa, abrigo e acompanhamento veterinário.<br><br>
 Também é importante oferecer atenção e respeitar as necessidades de cada animal. Ter um animal de estimação exige responsabilidade, pois ele não é um brinquedo e precisa de cuidados durante toda a vida.`,
 question:"De acordo com o texto, ter um animal de estimação significa:",
-options:["Assumir responsabilidades com seu bem-estar.","Oferecer comida apenas quando ele pedir.","Deixá-lo sozinho durante todo o dia.","Trat á-lo como um objeto de brincadeira."],
+options:["Assumir responsabilidades com seu bem-estar.","Oferecer comida apenas quando ele pedir.","Deixá-lo sozinho durante todo o dia.","Tratá-lo como um objeto de brincadeira."],
 answer:0
 },
+{
+subject:"Língua Portuguesa",
+text:"Leia a frase: “Mariana estava tão feliz que parecia estar nas nuvens.”",
+question:"A expressão “estar nas nuvens” foi utilizada para indicar que Mariana estava:",
+options:["Em um avião.","Muito feliz e animada.","Com medo de altura.","Observando o céu."],
+answer:1
+},
 
-/* MATEMÁTICA - 20 QUESTÕES */
+/* =====================================
+   MATEMÁTICA - QUESTÕES 21 A 40
+===================================== */
 
 {
 subject:"Matemática",
@@ -334,7 +350,7 @@ answer:2
 },
 {
 subject:"Matemática",
-text:"Qual fração representa a metade de uma figura dividida em duas partes iguais?",
+text:"Uma figura foi dividida em duas partes iguais. Uma dessas partes representa qual fração da figura inteira?",
 options:["1/2","1/3","1/4","2/3"],
 answer:0
 },
@@ -346,19 +362,19 @@ answer:2
 },
 {
 subject:"Matemática",
-text:"Observe as frações: 1/2 e 1/4. Qual delas representa a maior quantidade, considerando figuras do mesmo tamanho?",
+text:"Observe as frações 1/2 e 1/4. Considerando figuras do mesmo tamanho, qual fração representa a maior quantidade?",
 options:["1/2","1/4","As duas representam a mesma quantidade.","Nenhuma representa uma quantidade."],
 answer:0
 },
 {
 subject:"Matemática",
-text:"Uma caixa contém 24 lápis. Se 6 lápis forem retirados, quantos continuarão na caixa?",
+text:"Uma caixa possui 24 lápis. Se 6 lápis forem retirados, quantos continuarão na caixa?",
 options:["16","17","18","19"],
 answer:2
 },
 {
 subject:"Matemática",
-text:"Qual é o resultado da operação 245 + 132?",
+text:"Uma biblioteca tinha 245 livros e recebeu mais 132. Quantos livros ela possui agora?",
 options:["367","377","387","397"],
 answer:1
 },
@@ -388,7 +404,7 @@ answer:2
 },
 {
 subject:"Matemática",
-text:"Qual das figuras geométricas abaixo possui quatro lados iguais?",
+text:"Qual das figuras geométricas abaixo possui quatro lados iguais e quatro vértices?",
 options:["Triângulo","Quadrado","Círculo","Pentágono"],
 answer:1
 },
@@ -406,8 +422,8 @@ answer:2
 },
 {
 subject:"Matemática",
-text:"Qual objeto do cotidiano possui formato parecido com um cilindro?",
-options:["Lata de refrigerante","Bola de futebol","Dado","Casquinha de sorvete"],
+text:"Uma lata de refrigerante lembra qual sólido geométrico?",
+options:["Cilindro","Esfera","Cubo","Pirâmide"],
 answer:0
 }
 ];
@@ -417,30 +433,45 @@ let answers=new Array(questions.length).fill(null);
 
 function render(){
  const q=questions[current];
- document.getElementById("questionNumber").textContent=`Questão ${current+1} de ${questions.length}`;
+
+ document.getElementById("questionNumber").textContent=
+ `Questão ${current+1} de ${questions.length}`;
+
  document.getElementById("subjectInfo").textContent=q.subject;
- document.getElementById("progressBar").style.width=`${((current+1)/questions.length)*100}%`;
+
+ document.getElementById("progressBar").style.width=
+ `${((current+1)/questions.length)*100}%`;
 
  let html=`<div class="subject">${q.subject}</div>
  <div class="question">${q.text}</div>`;
 
- if(q.passage)html+=`<div class="text-box">${q.passage}</div>`;
+ if(q.passage){
+   html+=`<div class="text-box">${q.passage}</div>`;
+ }
 
  html+=`<div class="options">`;
+
  q.options.forEach((opt,i)=>{
-  html+=`<label class="option ${answers[current]===i?"selected":""}">
-   <input type="radio" name="answer" value="${i}"
-   ${answers[current]===i?"checked":""}
-   onchange="selectAnswer(${i})">
-   <span><strong>${String.fromCharCode(65+i)})</strong> ${opt}</span>
-  </label>`;
+   html+=`
+   <label class="option ${answers[current]===i?"selected":""}">
+     <input type="radio" name="answer" value="${i}"
+       ${answers[current]===i?"checked":""}
+       onchange="selectAnswer(${i})">
+     <span><strong>${String.fromCharCode(65+i)})</strong> ${opt}</span>
+   </label>`;
  });
+
  html+=`</div>`;
 
  document.getElementById("questionArea").innerHTML=html;
+
  document.getElementById("prevBtn").disabled=current===0;
- document.getElementById("nextBtn").classList.toggle("hidden",current===questions.length-1);
- document.getElementById("finishBtn").classList.toggle("hidden",current!==questions.length-1);
+
+ document.getElementById("nextBtn").classList.toggle(
+ "hidden",current===questions.length-1);
+
+ document.getElementById("finishBtn").classList.toggle(
+ "hidden",current!==questions.length-1);
 }
 
 function selectAnswer(value){
@@ -449,78 +480,106 @@ function selectAnswer(value){
 }
 
 function previousQuestion(){
- if(current>0){current--;render();}
+ if(current>0){
+   current--;
+   render();
+ }
 }
 
 function nextQuestion(){
- if(current<questions.length-1){current++;render();}
-}
-
-function isCorrect(q,answer){
- return answer===q.answer;
+ if(current<questions.length-1){
+   current++;
+   render();
+ }
 }
 
 function finishQuiz(){
  const unanswered=answers.filter(a=>a===null).length;
+
  if(unanswered>0){
-  if(!confirm(`Você ainda tem ${unanswered} questão(ões) sem resposta. Deseja finalizar mesmo assim?`))return;
+   if(!confirm(`Você ainda tem ${unanswered} questão(ões) sem resposta. Deseja finalizar mesmo assim?`)){
+     return;
+   }
  }
 
- let total=0,port=0,mat=0,portTotal=0,matTotal=0;
+ let total=0;
+ let port=0;
+ let mat=0;
+ let portTotal=0;
+ let matTotal=0;
 
  questions.forEach((q,i)=>{
-  if(q.subject==="Língua Portuguesa")portTotal++;
-  else matTotal++;
-  if(isCorrect(q,answers[i])){
-   total++;
-   if(q.subject==="Língua Portuguesa")port++;
-   else mat++;
-  }
+   if(q.subject==="Língua Portuguesa"){
+     portTotal++;
+   }else{
+     matTotal++;
+   }
+
+   if(answers[i]===q.answer){
+     total++;
+     if(q.subject==="Língua Portuguesa")port++;
+     else mat++;
+   }
  });
 
  let review="";
+
  questions.forEach((q,i)=>{
-  if(!isCorrect(q,answers[i])){
-   const chosen=answers[i]===null?"Não respondida":q.options[answers[i]];
-   review+=`<div class="review-item">
-   <strong>Questão ${i+1} - ${q.subject}</strong><br>
-   <span class="wrong">Sua resposta: ${chosen}</span><br>
-   <span class="correct">Resposta correta: ${q.options[q.answer]}</span>
-   </div>`;
-  }
+   if(answers[i]!==q.answer){
+     const chosen=answers[i]===null
+       ?"Não respondida"
+       :q.options[answers[i]];
+
+     review+=`
+     <div class="review-item">
+       <strong>Questão ${i+1} - ${q.subject}</strong><br>
+       <span class="wrong">Sua resposta: ${chosen}</span><br>
+       <span class="correct">Resposta correta: ${q.options[q.answer]}</span>
+     </div>`;
+   }
  });
 
  const result=document.getElementById("result");
+
  document.getElementById("quiz").classList.add("hidden");
  result.classList.remove("hidden");
 
  result.innerHTML=`
  <h2>Simulado finalizado!</h2>
  <p>Confira seu desempenho:</p>
+
  <div class="score">${total} / ${questions.length}</div>
+
  <p>Você acertou ${Math.round(total/questions.length*100)}% das questões.</p>
+
  <div class="result-box">
- <h3>Língua Portuguesa</h3>
- <strong>${port} de ${portTotal} questões</strong>
+   <h3>Língua Portuguesa</h3>
+   <strong>${port} de ${portTotal} questões</strong>
  </div>
+
  <div class="result-box">
- <h3>Matemática</h3>
- <strong>${mat} de ${matTotal} questões</strong>
+   <h3>Matemática</h3>
+   <strong>${mat} de ${matTotal} questões</strong>
  </div>
+
  <div class="result-box">
- <h3>Questões para revisar</h3>
- ${review||"<p class='correct'>Parabéns! Você acertou todas as questões!</p>"}
+   <h3>Questões para revisar</h3>
+   ${review||"<p class='correct'>Parabéns! Você acertou todas as questões!</p>"}
  </div>
+
  <button class="primary" onclick="restartQuiz()">Refazer simulado</button>
  `;
+
  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function restartQuiz(){
  current=0;
  answers=new Array(questions.length).fill(null);
+
  document.getElementById("result").classList.add("hidden");
  document.getElementById("quiz").classList.remove("hidden");
+
  render();
  window.scrollTo({top:0,behavior:"smooth"});
 }
