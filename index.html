@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado SAEGO - 5º Ano</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f1f4f9;color:#263449}
+header{background:#173b70;color:white;padding:27px 15px;text-align:center}
+header h1{font-size:26px;margin-bottom:8px}
+header p{color:#dce8fa;font-size:14px}
+.container{max-width:850px;margin:25px auto;padding:15px}
+.card{background:white;border-radius:12px;padding:25px;box-shadow:0 3px 12px #00000010;margin-bottom:20px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.info input,.answer-input{width:100%;padding:13px;border:1px solid #ccd5e2;border-radius:7px;font-size:15px}
+.section{display:inline-block;background:#e7effc;color:#17447f;padding:7px 12px;border-radius:20px;font-size:13px;font-weight:bold;margin-bottom:15px}
+.progress-info{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}
+.progress{height:9px;background:#e5e9ef;border-radius:10px;overflow:hidden;margin-bottom:22px}
+.progress-bar{height:100%;background:#2d70c7;width:0%;transition:.3s}
+.question-number{color:#718096;font-size:14px;margin-bottom:12px}
+.question{font-size:19px;line-height:1.5;font-weight:bold;margin-bottom:20px}
+.support{background:#f5f7fa;border-left:4px solid #3678c9;padding:17px;border-radius:5px;line-height:1.7;margin-bottom:20px;white-space:pre-line}
+.options{display:flex;flex-direction:column;gap:11px}
+.option{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #dce2eb;border-radius:8px;cursor:pointer;transition:.2s}
+.option:hover{background:#f0f5fc;border-color:#3678c9}
+.option.selected{background:#e7f0ff;border-color:#3678c9}
+.option input{accent-color:#245b9f;width:17px;height:17px}
+.match-item{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:12px;padding:12px;border-bottom:1px solid #eee}
+.match-item select{padding:10px;border-radius:7px;border:1px solid #ccd5e2;width:100%;background:white}
+.buttons{display:flex;justify-content:space-between;gap:10px;margin-top:25px}
+button{border:none;border-radius:7px;padding:13px 22px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{background:#1d5598;color:white}
+.secondary{background:#e8edf4;color:#34445b}
+button:hover{opacity:.88}
+button:disabled{opacity:.4;cursor:not-allowed}
+#result{display:none}
+.result-score{font-size:48px;color:#1d5598;text-align:center;font-weight:bold;margin:20px}
+.result-details{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center}
+.result-box{background:#f1f5fa;padding:20px;border-radius:9px}
+.result-box strong{display:block;font-size:26px;margin-top:8px}
+.review{padding:15px;border-bottom:1px solid #eee;line-height:1.6}
+.correct{color:#16804a;font-weight:bold}
+.wrong{color:#c03939;font-weight:bold}
+@media(max-width:550px){
+.info{grid-template-columns:1fr}
+.card{padding:18px}
+.question{font-size:17px}
+.match-item{grid-template-columns:1fr}
+.result-details{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>SIMULADO SAEGO</h1>
+<p>AVALIAÇÃO DE APRENDIZAGEM • 5º ANO</p>
+</header>
+
+<div class="container">
+
+<div class="card" id="identification">
+<h2>Identificação do estudante</h2>
+<p style="margin:12px 0;color:#68778b">Preencha seus dados antes de iniciar a avaliação.</p>
+<div class="info">
+<input id="student" placeholder="Nome do estudante">
+<input id="school" placeholder="Nome da escola">
+</div>
+<button class="primary" onclick="startQuiz()">Iniciar simulado</button>
+</div>
+
+<div class="card" id="quiz" style="display:none">
+<div class="progress-info">
+<span id="progressText"></span>
+<span id="answeredText"></span>
+</div>
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<span class="section" id="subject"></span>
+<div class="question-number" id="number"></div>
+<div class="support" id="support" style="display:none"></div>
+<div class="question" id="question"></div>
+<div id="answerArea"></div>
+<div class="buttons">
+<button class="secondary" id="prev" onclick="navigate(-1)">Anterior</button>
+<button class="primary" id="next" onclick="navigate(1)">Próxima</button>
+</div>
+</div>
+
+<div class="card" id="result">
+<h2 style="text-align:center">Resultado do simulado</h2>
+<div class="result-score" id="score"></div>
+<p style="text-align:center;margin-bottom:25px" id="message"></p>
+
+<div class="result-details">
+<div class="result-box">Língua Portuguesa<strong id="portScore"></strong><small>de 20 questões</small></div>
+<div class="result-box">Matemática<strong id="mathScore"></strong><small>de 20 questões</small></div>
+<div class="result-box">Acertos<strong id="hits"></strong></div>
+<div class="result-box">Erros<strong id="errors"></strong></div>
+</div>
+
+<h3 style="margin-top:30px;margin-bottom:15px">Correção das questões</h3>
+<div id="review"></div>
+<button class="primary" style="margin-top:20px" onclick="location.reload()">Fazer novamente</button>
+</div>
+
+</div>
+
+<script>
+
+const questions = [
+
+/* PORTUGUÊS: 1 A 20 */
+
+{
+subject:"Língua Portuguesa",type:"mc",
+support:"Leia o texto:\n\nO passeio de Mariana\n\nMariana acordou cedo no sábado. Preparou sua mochila, colocou uma garrafa de água e alguns lanches. Ela estava muito animada, pois iria visitar o parque ecológico com sua família.",
+q:"1. Por que Mariana estava animada?",
+options:["Porque iria à escola.","Porque visitaria o parque ecológico.","Porque iria dormir.","Porque ganharia uma mochila."],
+a:1
+},
+{
+subject:"Língua Portuguesa",type:"tf",
+q:"2. Mariana preparou sua mochila antes de sair para o passeio.",
+options:["Verdadeiro","Falso"],a:0
+},
+{
+subject:"Língua Portuguesa",type:"fill",
+q:"3. Complete a frase com a palavra que indica uma ação: Mariana ______ cedo no sábado.",
+a:["acordou"]
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+support:"'Pedro correu rapidamente para não perder o ônibus.'",
+q:"4. A palavra 'rapidamente' indica:",
+options:["Um lugar.","Uma característica de Pedro.","Como Pedro correu.","Uma pessoa."],a:2
+},
+{
+subject:"Língua Portuguesa",type:"match",
+q:"5. Relacione cada palavra à sua classificação.",
+left:["Casa","Bonito","Correr","Ontem"],
+right:["Substantivo","Adjetivo","Verbo","Advérbio"],
+a:[0,1,2,3]
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+support:"Leia:\n\nA formiga e a pomba\n\nUma formiga caiu em um riacho e começou a se debater. Uma pomba, que estava em uma árvore próxima, deixou cair uma folha na água. A formiga subiu na folha e conseguiu chegar à margem.",
+q:"6. Qual é a principal mensagem dessa história?",
+options:["Devemos ajudar quem precisa.","Não devemos sair de casa.","As formigas não sabem nadar.","As pombas não gostam de árvores."],a:0
+},
+{
+subject:"Língua Portuguesa",type:"fill",
+q:"7. Complete corretamente: O plural de 'animal' é ______.",
+a:["animais"]
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+q:"8. Qual alternativa apresenta uma frase com pontuação correta?",
+options:["Maria você trouxe o livro.","Maria, você trouxe o livro?","Maria você, trouxe o livro.","Maria você trouxe, o livro?"],a:1
+},
+{
+subject:"Língua Portuguesa",type:"tf",
+q:"9. Na frase 'O menino brincou no quintal', a palavra 'menino' é um substantivo.",
+options:["Verdadeiro","Falso"],a:0
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+support:"Leia:\n\n'As nuvens cobriram o céu e, pouco depois, começou a chover. As pessoas correram para procurar abrigo.'",
+q:"10. O que fez as pessoas procurarem abrigo?",
+options:["O aparecimento do sol.","O início da chuva.","O fim da tarde.","O vento fraco."],a:1
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+q:"11. Qual palavra tem o mesmo significado de 'feliz'?",
+options:["Triste","Contente","Bravo","Cansado"],a:1
+},
+{
+subject:"Língua Portuguesa",type:"fill",
+q:"12. Complete com o antônimo de 'claro': ______.",
+a:["escuro"]
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+q:"13. Qual das palavras está escrita corretamente?",
+options:["Excessão","Esceção","Exceção","Eceção"],a:2
+},
+{
+subject:"Língua Portuguesa",type:"tf",
+q:"14. Uma receita culinária apresenta ingredientes e o modo de preparo de um alimento.",
+options:["Verdadeiro","Falso"],a:0
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+support:"Leia:\n\n'João perdeu o ônibus porque acordou muito tarde. Por isso, precisou ir à escola a pé.'",
+q:"15. A expressão 'Por isso' estabelece uma ideia de:",
+options:["Dúvida","Consequência","Comparação","Lugar"],a:1
+},
+{
+subject:"Língua Portuguesa",type:"match",
+q:"16. Relacione as palavras aos seus significados.",
+left:["Pequeno","Iniciar","Belo","Rápido"],
+right:["Começar","Bonito","Veloz","Miúdo"],
+a:[3,0,1,2]
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+q:"17. Qual alternativa apresenta uma palavra no diminutivo?",
+options:["Casarão","Casinha","Casebre","Casa"],a:1
+},
+{
+subject:"Língua Portuguesa",type:"fill",
+q:"18. Complete com a forma correta do verbo: Ontem, os alunos ______ no parque. (brincar)",
+a:["brincaram"]
+},
+{
+subject:"Língua Portuguesa",type:"tf",
+q:"19. A palavra 'flor' possui quatro letras e uma sílaba.",
+options:["Verdadeiro","Falso"],a:1
+},
+{
+subject:"Língua Portuguesa",type:"mc",
+support:"Leia:\n\nO lixo e o meio ambiente\n\nSeparar os resíduos é uma atitude importante para preservar o meio ambiente. Materiais como papel, plástico, vidro e metal podem ser encaminhados para a reciclagem. Essa prática ajuda a diminuir a quantidade de lixo descartado na natureza.",
+q:"20. Qual é o assunto principal do texto?",
+options:["A importância dos animais.","A preservação do meio ambiente por meio da reciclagem.","A fabricação de brinquedos.","A importância das escolas."],a:1
+},
+
+/* MATEMÁTICA: 21 A 40 */
+
+{
+subject:"Matemática",type:"mc",
+q:"21. Uma escola recebeu 1.245 livros e depois recebeu mais 378. Quantos livros recebeu ao todo?",
+options:["1.513","1.623","1.723","1.533"],a:1
+},
+{
+subject:"Matemática",type:"fill",
+q:"22. Uma caixa possui 8 pacotes com 6 lápis em cada um. Quantos lápis existem ao todo? Resposta: ______.",
+a:["48"]
+},
+{
+subject:"Matemática",type:"mc",
+q:"23. Qual fração representa a metade de uma pizza dividida em 8 partes iguais?",
+options:["1/8","2/8","4/8","8/8"],a:2
+},
+{
+subject:"Matemática",type:"tf",
+q:"24. O número 3.456 possui 3 unidades de milhar, 4 centenas, 5 dezenas e 6 unidades.",
+options:["Verdadeiro","Falso"],a:0
+},
+{
+subject:"Matemática",type:"match",
+q:"25. Relacione cada operação ao seu resultado.",
+left:["25 × 4","144 ÷ 12","350 + 150","900 - 275"],
+right:["100","12","500","625"],
+a:[0,1,2,3]
+},
+{
+subject:"Matemática",type:"mc",
+q:"26. Uma aula começou às 13h30 e terminou às 15h. Quanto tempo durou?",
+options:["30 minutos","1 hora","1 hora e 30 minutos","2 horas"],a:2
+},
+{
+subject:"Matemática",type:"fill",
+q:"27. Um retângulo possui 5 cm de comprimento e 3 cm de largura. Qual é seu perímetro? Resposta: ______ cm.",
+a:["16"]
+},
+{
+subject:"Matemática",type:"mc",
+q:"28. Observe a sequência: 5, 10, 15, 20, 25, ___. Qual número completa a sequência?",
+options:["28","30","35","40"],a:1
+},
+{
+subject:"Matemática",type:"tf",
+q:"29. Um ângulo reto mede exatamente 90 graus.",
+options:["Verdadeiro","Falso"],a:0
+},
+{
+subject:"Matemática",type:"mc",
+support:"Uma papelaria vendeu durante a manhã:\n\nCadernos: 35 unidades\nLápis: 48 unidades\nBorrachas: 17 unidades",
+q:"30. Quantos produtos foram vendidos ao todo?",
+options:["90","100","110","120"],a:1
+},
+{
+subject:"Matemática",type:"mc",
+q:"31. Qual é o resultado de 2.500 - 875?",
+options:["1.525","1.625","1.725","1.825"],a:1
+},
+{
+subject:"Matemática",type:"fill",
+q:"32. Uma compra custou R$ 35,00. O cliente pagou com R$ 50,00. Qual foi o troco? Resposta: R$ ______.",
+a:["15","15,00","15.00"]
+},
+{
+subject:"Matemática",type:"mc",
+q:"33. Qual número corresponde a 5 unidades de milhar, 2 centenas, 3 dezenas e 4 unidades?",
+options:["5.234","5.324","5.243","5.423"],a:0
+},
+{
+subject:"Matemática",type:"tf",
+q:"34. Um quilômetro corresponde a 1.000 metros.",
+options:["Verdadeiro","Falso"],a:0
+},
+{
+subject:"Matemática",type:"mc",
+q:"35. Uma escola tem 240 estudantes. Eles serão divididos igualmente em 6 grupos. Quantos estudantes ficarão em cada grupo?",
+options:["30","35","40","45"],a:2
+},
+{
+subject:"Matemática",type:"match",
+q:"36. Relacione cada figura geométrica à sua característica.",
+left:["Triângulo","Quadrado","Retângulo","Círculo"],
+right:["Possui três lados","Possui quatro lados iguais","Possui quatro ângulos retos e lados opostos iguais","Não possui lados retos"],
+a:[0,1,2,3]
+},
+{
+subject:"Matemática",type:"fill",
+q:"37. Uma garrafa contém 2 litros de água. Quantos mililitros isso representa? Resposta: ______ mL.",
+a:["2000","2.000"]
+},
+{
+subject:"Matemática",type:"mc",
+support:"Observe os resultados de uma pesquisa sobre frutas favoritas:\n\nMaçã: 12 votos\nBanana: 18 votos\nUva: 10 votos\nManga: 15 votos",
+q:"38. Qual foi a fruta mais votada?",
+options:["Maçã","Banana","Uva","Manga"],a:1
+},
+{
+subject:"Matemática",type:"tf",
+q:"39. A fração 3/4 representa três partes de um total dividido em quatro partes iguais.",
+options:["Verdadeiro","Falso"],a:0
+},
+{
+subject:"Matemática",type:"mc",
+q:"40. Ana comprou 3 cadernos por R$ 12,00 cada e uma caneta por R$ 5,00. Quanto ela gastou?",
+options:["R$ 36,00","R$ 39,00","R$ 41,00","R$ 45,00"],a:1
+}
+
+];
+
+let current=0;
+let answers=Array(questions.length).fill(null);
+
+function isAnswered(index){
+const q=questions[index];
+const a=answers[index];
+
+if(q.type==="match"){
+return Array.isArray(a)&&a.length===q.left.length&&a.every(v=>v!==null);
+}
+if(q.type==="fill"){
+return typeof a==="string"&&a.trim()!=="";
+}
+return a!==null;
+}
+
+function startQuiz(){
+const name=document.getElementById("student").value.trim();
+if(!name){
+alert("Digite o nome do estudante antes de iniciar.");
+return;
+}
+document.getElementById("identification").style.display="none";
+document.getElementById("quiz").style.display="block";
+render();
+}
+
+function updateProgress(){
+const answered=answers.filter((a,i)=>isAnswered(i)).length;
+document.getElementById("answeredText").textContent="Respondidas: "+answered+"/40";
+document.getElementById("progressText").textContent="Questão "+(current+1)+" de 40";
+document.getElementById("progressBar").style.width=((current+1)/40*100)+"%";
+}
+
+function render(){
+const q=questions[current];
+
+document.getElementById("subject").textContent=q.subject;
+document.getElementById("number").textContent="QUESTÃO "+(current+1);
+document.getElementById("question").textContent=q.q;
+
+const support=document.getElementById("support");
+support.style.display=q.support?"block":"none";
+support.textContent=q.support||"";
+
+const area=document.getElementById("answerArea");
+area.innerHTML="";
+
+if(q.type==="mc"||q.type==="tf"){
+q.options.forEach((option,index)=>{
+const label=document.createElement("label");
+label.className="option";
+
+const input=document.createElement("input");
+input.type="radio";
+input.name="answer";
+input.checked=answers[current]===index;
+
+input.onchange=()=>{
+answers[current]=index;
+render();
+};
+
+label.appendChild(input);
+label.appendChild(document.createTextNode(option));
+
+if(answers[current]===index)label.classList.add("selected");
+area.appendChild(label);
+});
+}
+
+if(q.type==="fill"){
+const input=document.createElement("input");
+input.className="answer-input";
+input.placeholder="Digite sua resposta...";
+input.value=answers[current]??"";
+
+input.oninput=()=>{
+answers[current]=input.value;
+updateProgress();
+};
+
+area.appendChild(input);
+}
+
+if(q.type==="match"){
+q.left.forEach((item,index)=>{
+const row=document.createElement("div");
+row.className="match-item";
+
+const text=document.createElement("strong");
+text.textContent=(index+1)+". "+item;
+
+const select=document.createElement("select");
+select.innerHTML='<option value="">Selecione...</option>';
+
+q.right.forEach((option,optionIndex)=>{
+const opt=document.createElement("option");
+opt.value=optionIndex;
+opt.textContent=String.fromCharCode(65+optionIndex)+") "+option;
+select.appendChild(opt);
+});
+
+if(answers[current]&&answers[current][index]!==null){
+select.value=answers[current][index];
+}
+
+select.onchange=()=>{
+if(!answers[current]){
+answers[current]=Array(q.left.length).fill(null);
+}
+answers[current][index]=select.value===""?null:Number(select.value);
+updateProgress();
+};
+
+row.appendChild(text);
+row.appendChild(select);
+area.appendChild(row);
+});
+}
+
+document.getElementById("prev").disabled=current===0;
+document.getElementById("next").textContent=current===39?"Finalizar prova":"Próxima";
+
+updateProgress();
+}
+
+function navigate(direction){
+if(direction===1&&current===39){
+const unanswered=answers.filter((a,i)=>!isAnswered(i)).length;
+
+if(unanswered>0){
+if(!confirm("Você ainda possui "+unanswered+" questões sem resposta. Deseja finalizar mesmo assim?"))return;
+}
+finish();
+return;
+}
+
+current+=direction;
+render();
+}
+
+function isCorrect(q,answer){
+if(answer===null)return false;
+
+if(q.type==="fill"){
+const value=String(answer).trim().toLowerCase().replace(/\s/g,"");
+return q.a.some(item=>value===item.toLowerCase().replace(/\s/g,""));
+}
+
+if(q.type==="match"){
+return Array.isArray(answer)&&answer.length===q.a.length&&q.a.every((item,index)=>answer[index]===item);
+}
+
+return answer===q.a;
+}
+
+function finish(){
+let port=0;
+let math=0;
+
+questions.forEach((q,index)=>{
+if(isCorrect(q,answers[index])){
+if(q.subject==="Matemática")math++;
+else port++;
+}
+});
+
+const total=port+math;
+
+document.getElementById("quiz").style.display="none";
+document.getElementById("result").style.display="block";
+
+document.getElementById("score").textContent=total+" / 40";
+document.getElementById("portScore").textContent=port;
+document.getElementById("mathScore").textContent=math;
+document.getElementById("hits").textContent=total;
+document.getElementById("errors").textContent=40-total;
+
+let message="";
+
+if(total>=36)message="Excelente resultado! Você demonstrou ótimo domínio dos conteúdos.";
+else if(total>=30)message="Muito bom! Continue praticando para avançar ainda mais.";
+else if(total>=24)message="Bom trabalho! Você está no caminho certo.";
+else if(total>=20)message="Continue estudando! Revise os conteúdos e tente novamente.";
+else message="Não desanime! A prática é importante para aprender cada vez mais.";
+
+document.getElementById("message").textContent=message;
+
+const review=document.getElementById("review");
+review.innerHTML="";
+
+questions.forEach((q,index)=>{
+const correct=isCorrect(q,answers[index]);
+
+const div=document.createElement("div");
+div.className="review";
+
+const title=document.createElement("strong");
+title.textContent="Questão "+(index+1)+" - "+q.subject;
+
+const status=document.createElement("p");
+status.className=correct?"correct":"wrong";
+status.textContent=correct?"✓ Acertou":"✗ Errou";
+
+const explanation=document.createElement("p");
+
+let answerText="";
+
+if(q.type==="fill"){
+answerText=q.a[0];
+}else if(q.type==="match"){
+answerText=q.left.map((item,i)=>item+" = "+q.right[q.a[i]]).join("; ");
+}else{
+answerText=q.options[q.a];
+}
+
+explanation.textContent="Resposta correta: "+answerText;
+
+div.appendChild(title);
+div.appendChild(status);
+
+if(!correct)div.appendChild(explanation);
+
+review.appendChild(div);
+});
+
+window.scrollTo(0,0);
+}
+
+</script>
+</body>
+</html>
