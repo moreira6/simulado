@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulado SAEGO - 5º Ano</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#f1f4f9;color:#263449}
@@ -13,8 +14,6 @@ header h1{font-size:26px;margin-bottom:8px}
 header p{color:#dce8fa;font-size:14px}
 .container{max-width:850px;margin:25px auto;padding:15px}
 .card{background:white;border-radius:12px;padding:25px;box-shadow:0 3px 12px #00000010;margin-bottom:20px}
-.info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
-.info input,.answer-input{width:100%;padding:13px;border:1px solid #ccd5e2;border-radius:7px;font-size:15px}
 .section{display:inline-block;background:#e7effc;color:#17447f;padding:7px 12px;border-radius:20px;font-size:13px;font-weight:bold;margin-bottom:15px}
 .progress-info{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}
 .progress{height:9px;background:#e5e9ef;border-radius:10px;overflow:hidden;margin-bottom:22px}
@@ -22,13 +21,13 @@ header p{color:#dce8fa;font-size:14px}
 .question-number{color:#718096;font-size:14px;margin-bottom:12px}
 .question{font-size:19px;line-height:1.5;font-weight:bold;margin-bottom:20px}
 .support{background:#f5f7fa;border-left:4px solid #3678c9;padding:17px;border-radius:5px;line-height:1.7;margin-bottom:20px;white-space:pre-line}
-.options{display:flex;flex-direction:column;gap:11px}
-.option{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #dce2eb;border-radius:8px;cursor:pointer;transition:.2s}
+.option{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #dce2eb;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:11px}
 .option:hover{background:#f0f5fc;border-color:#3678c9}
 .option.selected{background:#e7f0ff;border-color:#3678c9}
 .option input{accent-color:#245b9f;width:17px;height:17px}
 .match-item{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:12px;padding:12px;border-bottom:1px solid #eee}
 .match-item select{padding:10px;border-radius:7px;border:1px solid #ccd5e2;width:100%;background:white}
+.answer-input{width:100%;padding:13px;border:1px solid #ccd5e2;border-radius:7px;font-size:15px}
 .buttons{display:flex;justify-content:space-between;gap:10px;margin-top:25px}
 button{border:none;border-radius:7px;padding:13px 22px;font-size:15px;font-weight:bold;cursor:pointer}
 .primary{background:#1d5598;color:white}
@@ -44,7 +43,6 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .correct{color:#16804a;font-weight:bold}
 .wrong{color:#c03939;font-weight:bold}
 @media(max-width:550px){
-.info{grid-template-columns:1fr}
 .card{padding:18px}
 .question{font-size:17px}
 .match-item{grid-template-columns:1fr}
@@ -62,27 +60,22 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
 <div class="container">
 
-<div class="card" id="identification">
-<h2>Identificação do estudante</h2>
-<p style="margin:12px 0;color:#68778b">Preencha seus dados antes de iniciar a avaliação.</p>
-<div class="info">
-<input id="student" placeholder="Nome do estudante">
-<input id="school" placeholder="Nome da escola">
-</div>
-<button class="primary" onclick="startQuiz()">Iniciar simulado</button>
-</div>
-
-<div class="card" id="quiz" style="display:none">
+<div class="card" id="quiz">
 <div class="progress-info">
 <span id="progressText"></span>
 <span id="answeredText"></span>
 </div>
-<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
 <span class="section" id="subject"></span>
 <div class="question-number" id="number"></div>
 <div class="support" id="support" style="display:none"></div>
 <div class="question" id="question"></div>
 <div id="answerArea"></div>
+
 <div class="buttons">
 <button class="secondary" id="prev" onclick="navigate(-1)">Anterior</button>
 <button class="primary" id="next" onclick="navigate(1)">Próxima</button>
@@ -91,19 +84,40 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
 <div class="card" id="result">
 <h2 style="text-align:center">Resultado do simulado</h2>
+
 <div class="result-score" id="score"></div>
 <p style="text-align:center;margin-bottom:25px" id="message"></p>
 
 <div class="result-details">
-<div class="result-box">Língua Portuguesa<strong id="portScore"></strong><small>de 20 questões</small></div>
-<div class="result-box">Matemática<strong id="mathScore"></strong><small>de 20 questões</small></div>
-<div class="result-box">Acertos<strong id="hits"></strong></div>
-<div class="result-box">Erros<strong id="errors"></strong></div>
+<div class="result-box">
+Língua Portuguesa
+<strong id="portScore"></strong>
+<small>de 20 questões</small>
+</div>
+
+<div class="result-box">
+Matemática
+<strong id="mathScore"></strong>
+<small>de 20 questões</small>
+</div>
+
+<div class="result-box">
+Acertos
+<strong id="hits"></strong>
+</div>
+
+<div class="result-box">
+Erros
+<strong id="errors"></strong>
+</div>
 </div>
 
 <h3 style="margin-top:30px;margin-bottom:15px">Correção das questões</h3>
 <div id="review"></div>
-<button class="primary" style="margin-top:20px" onclick="location.reload()">Fazer novamente</button>
+
+<button class="primary" style="margin-top:20px" onclick="location.reload()">
+Fazer novamente
+</button>
 </div>
 
 </div>
@@ -135,7 +149,8 @@ a:["acordou"]
 subject:"Língua Portuguesa",type:"mc",
 support:"'Pedro correu rapidamente para não perder o ônibus.'",
 q:"4. A palavra 'rapidamente' indica:",
-options:["Um lugar.","Uma característica de Pedro.","Como Pedro correu.","Uma pessoa."],a:2
+options:["Um lugar.","Uma característica de Pedro.","Como Pedro correu.","Uma pessoa."],
+a:2
 },
 {
 subject:"Língua Portuguesa",type:"match",
@@ -148,7 +163,8 @@ a:[0,1,2,3]
 subject:"Língua Portuguesa",type:"mc",
 support:"Leia:\n\nA formiga e a pomba\n\nUma formiga caiu em um riacho e começou a se debater. Uma pomba, que estava em uma árvore próxima, deixou cair uma folha na água. A formiga subiu na folha e conseguiu chegar à margem.",
 q:"6. Qual é a principal mensagem dessa história?",
-options:["Devemos ajudar quem precisa.","Não devemos sair de casa.","As formigas não sabem nadar.","As pombas não gostam de árvores."],a:0
+options:["Devemos ajudar quem precisa.","Não devemos sair de casa.","As formigas não sabem nadar.","As pombas não gostam de árvores."],
+a:0
 },
 {
 subject:"Língua Portuguesa",type:"fill",
@@ -158,7 +174,8 @@ a:["animais"]
 {
 subject:"Língua Portuguesa",type:"mc",
 q:"8. Qual alternativa apresenta uma frase com pontuação correta?",
-options:["Maria você trouxe o livro.","Maria, você trouxe o livro?","Maria você, trouxe o livro.","Maria você trouxe, o livro?"],a:1
+options:["Maria você trouxe o livro.","Maria, você trouxe o livro?","Maria você, trouxe o livro.","Maria você trouxe, o livro?"],
+a:1
 },
 {
 subject:"Língua Portuguesa",type:"tf",
@@ -169,7 +186,8 @@ options:["Verdadeiro","Falso"],a:0
 subject:"Língua Portuguesa",type:"mc",
 support:"Leia:\n\n'As nuvens cobriram o céu e, pouco depois, começou a chover. As pessoas correram para procurar abrigo.'",
 q:"10. O que fez as pessoas procurarem abrigo?",
-options:["O aparecimento do sol.","O início da chuva.","O fim da tarde.","O vento fraco."],a:1
+options:["O aparecimento do sol.","O início da chuva.","O fim da tarde.","O vento fraco."],
+a:1
 },
 {
 subject:"Língua Portuguesa",type:"mc",
@@ -223,7 +241,8 @@ options:["Verdadeiro","Falso"],a:1
 subject:"Língua Portuguesa",type:"mc",
 support:"Leia:\n\nO lixo e o meio ambiente\n\nSeparar os resíduos é uma atitude importante para preservar o meio ambiente. Materiais como papel, plástico, vidro e metal podem ser encaminhados para a reciclagem. Essa prática ajuda a diminuir a quantidade de lixo descartado na natureza.",
 q:"20. Qual é o assunto principal do texto?",
-options:["A importância dos animais.","A preservação do meio ambiente por meio da reciclagem.","A fabricação de brinquedos.","A importância das escolas."],a:1
+options:["A importância dos animais.","A preservação do meio ambiente por meio da reciclagem.","A fabricação de brinquedos.","A importância das escolas."],
+a:1
 },
 
 /* MATEMÁTICA: 21 A 40 */
@@ -351,17 +370,6 @@ if(q.type==="fill"){
 return typeof a==="string"&&a.trim()!=="";
 }
 return a!==null;
-}
-
-function startQuiz(){
-const name=document.getElementById("student").value.trim();
-if(!name){
-alert("Digite o nome do estudante antes de iniciar.");
-return;
-}
-document.getElementById("identification").style.display="none";
-document.getElementById("quiz").style.display="block";
-render();
 }
 
 function updateProgress(){
@@ -566,6 +574,8 @@ review.appendChild(div);
 
 window.scrollTo(0,0);
 }
+
+render();
 
 </script>
 </body>
